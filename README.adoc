@@ -1,0 +1,12 @@
+= codeforces-tasks
+:linkattrs:
+
+Solutions for link:http://codeforces.com/profile/yaroslav.yermilov[Codeforces, window="_blank"] tasks.
+
+== Travis job
+
+image:https://travis-ci.org/yermilov/codeforces-tasks.svg?branch=develop["Travis job", link="https://travis-ci.org/yermilov/codeforces-tasks"]
+
+== Code coverage
+
+image:https://codecov.io/gh/yermilov/codeforces-tasks/branch/develop/graph/badge.svg["Code coverage", link="https://codecov.io/gh/yermilov/codeforces-tasks"]
