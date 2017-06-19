@@ -1,14 +1,15 @@
-package com.codeforces.yermilov.tasks;
+package com.codeforces.yermilov.task_546d;
 
 import com.codeforces.yermilov.util.FastScanner;
+// tag::imports[]
+import java.io.*;
+// end::imports[]
+// tag::submit[]
 
-import java.io.BufferedOutputStream;
-import java.io.PrintWriter;
-
-public class Task546D {
+public class Main {
 
     public static void main(String[] args) {
-        Task546D task546D = new Task546D();
+        Main main = new Main();
 
         FastScanner fastScanner = new FastScanner();
         PrintWriter printWriter = new PrintWriter(new BufferedOutputStream(System.out));
@@ -19,7 +20,7 @@ public class Task546D {
             int a = fastScanner.nextInt();
             int b = fastScanner.nextInt();
 
-            int result = task546D.solve(a, b);
+            int result = main.solve(a, b);
 
             printWriter.println(result);
         }
@@ -32,7 +33,7 @@ public class Task546D {
     private final int[] dt;
     private final int[] dtf;
 
-    Task546D() {
+    Main() {
         dt = new int[MAX_AB];
         for (int i = 2; i < MAX_AB; i++) {
             if (dt[i] == 0) {
@@ -54,3 +55,4 @@ public class Task546D {
         return dtf[a] - dtf[b];
     }
 }
+// end::submit[]

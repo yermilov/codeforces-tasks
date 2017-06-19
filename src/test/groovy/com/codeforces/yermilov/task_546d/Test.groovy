@@ -1,12 +1,13 @@
-package com.codeforces.yermilov.tasks
+package com.codeforces.yermilov.task_546d
 
 import spock.lang.Specification
 
-class Task546DTest extends Specification {
+class Test extends Specification {
 
+    // tag::tests[]
     def 'solve'() {
         given:
-        Task546D task546D = new Task546D()
+        Main task546D = new Main()
 
         expect:
         task546D.solve(a, b) == expected
@@ -20,4 +21,5 @@ class Task546DTest extends Specification {
         5_000_000 | 5_000_000 || 0
         5_000_000 | 1         || 18703742
     }
+    // end::tests[]
 }

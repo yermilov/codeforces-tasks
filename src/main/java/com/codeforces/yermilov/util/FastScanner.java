@@ -1,14 +1,17 @@
 package com.codeforces.yermilov.util;
-
+// tag::imports[]
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
+// end::imports[]
 
 /**
  * Done via http://codeforces.com/blog/entry/7018?locale=ru
  */
-public class FastScanner {
+public
+// tag::submit[]
+ class FastScanner {
 
     private final BufferedReader bufferedReader;
     private StringTokenizer stringTokenizer;
@@ -50,3 +53,4 @@ public class FastScanner {
         return str;
     }
 }
+// end::submit[]

@@ -1,3 +1,13 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.3'
+    }
+}
+
 plugins {
     id 'com.gradle.build-scan' version '1.7.4'
 
@@ -30,4 +40,20 @@ jacocoTestReport {
         xml.enabled = true
         html.enabled = true
     }
+}
+
+apply plugin: 'org.asciidoctor.convert'
+
+asciidoctor {
+    backends = ['html5']
+
+    sources {
+        include '*.adoc'
+    }
+
+    attributes  'sourcedir'          : file('src'),
+                'source-highlighter' : 'coderay',
+                'icons'              : 'font',
+                'numbered'           : '',
+                'idprefix'           : ''
 }
