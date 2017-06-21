@@ -7,10 +7,10 @@ class Test extends Specification {
     // tag::tests[]
     def 'solve'() {
         given:
-        Main task546D = new Main()
+        Main task546d = new Main()
 
         expect:
-        task546D.solve(a, b) == expected
+        task546d.solve(a, b) == expected
 
         where:
         a         | b         || expected
