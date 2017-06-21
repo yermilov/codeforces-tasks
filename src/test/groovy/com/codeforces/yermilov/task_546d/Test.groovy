@@ -1,11 +1,13 @@
 package com.codeforces.yermilov.task_546d
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
+@Unroll
 class Test extends Specification {
 
     // tag::tests[]
-    def 'solve'() {
+    def 'solve(#a, #b) == #expected'() {
         given:
         Main task546d = new Main()
 
