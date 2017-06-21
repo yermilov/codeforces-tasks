@@ -45,6 +45,8 @@ jacocoTestReport {
 apply plugin: 'org.asciidoctor.convert'
 
 asciidoctor {
+    dependsOn('check')
+
     backends = ['html5']
 
     sources {
