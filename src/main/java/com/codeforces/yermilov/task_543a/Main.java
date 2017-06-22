@@ -9,6 +9,8 @@ import java.io.PrintWriter;
 
 public class Main {
 
+    int[][][] dn;
+
     public static void main(String[] args) {
         Main main = new Main();
 
@@ -34,20 +36,20 @@ public class Main {
     }
 
     int solve(int N, int M, int B, int mod, int[] a) {
-        int[][][] dn = new int [N+1][M+1][B+1];
+        dn = new int [2][M+1][B+1];
         for (int n = 0; n <= N; n++) {
             for (int m = 0; m <= M; m++) {
                 for (int b = 0; b <= B; b++) {
                     if (m == 0) {
-                        dn[n][m][b] = 1;
+                        dn[n%2][m][b] = 1;
                     } else {
                         if (n == 0) {
-                            dn[n][m][b] = 0;
+                            dn[n%2][m][b] = 0;
                         } else {
                             if (a[n-1] <= b) {
-                                dn[n][m][b] = (dn[n - 1][m][b] + dn[n][m - 1][b - a[n-1]]) % mod;
+                                dn[n%2][m][b] = (dn[(n + 1)%2][m][b] + dn[n%2][m - 1][b - a[n-1]]) % mod;
                             } else {
-                                dn[n][m][b] = dn[n - 1][m][b];
+                                dn[n%2][m][b] = dn[(n + 1)%2][m][b];
                             }
                         }
                     }
@@ -55,7 +57,7 @@ public class Main {
             }
         }
 
-        return dn[N][M][B] % mod;
+        return dn[N%2][M][B] % mod;
     }
 }
 // end::submit[]
