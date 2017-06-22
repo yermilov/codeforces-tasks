@@ -26,6 +26,7 @@ public class Main {
     class TaskSolver {
 
         final int[][][] cache;
+        final boolean[][][] calcualted;
 
         final int mod;
         final int[] a;
@@ -36,6 +37,7 @@ public class Main {
             this.mod = mod;
             this.a = Arrays.stream(a).map(x -> -x).sorted().map(x -> -x).toArray();
             this.cache = new int [501][501][501];
+            this.calcualted = new boolean[501][501][501];
 
             minas = new int[a.length];
             minas[0] = this.a[0];
@@ -65,13 +67,14 @@ public class Main {
                 return 1;
             }
 
-            if (cache[n][m][b] == 0) {
+            if (!calcualted[n][m][b]) {
                 int result = 0;
                 for (int i = 0; i <= m; i++) {
                     result = (result + solve(n - 1, m - i, b - i * a[n-1])) % mod;
                 }
 
                 cache[n][m][b] = result;
+                calcualted[n][m][b] = true;
             }
 
             return cache[n][m][b];
