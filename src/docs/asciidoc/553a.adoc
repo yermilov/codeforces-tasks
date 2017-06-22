@@ -1,10 +1,10 @@
-= A. Kyoya and Colored Balls
+= 553A. Kyoya and Colored Balls
 ifndef::sourcedir[:sourcedir: ../..]
 :icons: font
 :linkattrs:
 :source-highlighter: coderay
 
-link:http://codeforces.com/problemset/problem/553/A[Task, window="_blank"]
+link:http://codeforces.com/problemset/problem/553/A[Task 553A, window="_blank"]
 
 [source,java]
 .Solution

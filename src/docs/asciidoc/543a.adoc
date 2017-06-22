@@ -1,0 +1,25 @@
+= 543A. Writing Code
+ifndef::sourcedir[:sourcedir: ../..]
+:icons: font
+:linkattrs:
+:source-highlighter: coderay
+
+link:http://codeforces.com/problemset/problem/543/A[Task 543A, window="_blank"]
+
+[source,java]
+.Solution
+----
+include::{sourcedir}/main/java/com/codeforces/yermilov/task_543a/Main.java[tags=imports]
+include::{sourcedir}/main/java/com/codeforces/yermilov/util/FastScanner.java[tags=imports]
+
+include::{sourcedir}/main/java/com/codeforces/yermilov/task_543a/Main.java[tags=submit]
+
+include::{sourcedir}/main/java/com/codeforces/yermilov/util/FastScanner.java[tags=submit]
+----
+
+[source,java]
+.Tests
+----
+include::{sourcedir}/test/groovy/com/codeforces/yermilov/task_543a/Test.groovy[tags=tests]
+----
+

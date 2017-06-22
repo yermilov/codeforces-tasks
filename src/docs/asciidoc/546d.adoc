@@ -4,7 +4,7 @@ ifndef::sourcedir[:sourcedir: ../..]
 :linkattrs:
 :source-highlighter: coderay
 
-link:http://codeforces.com/problemset/problem/546/D[Task, window="_blank"]
+link:http://codeforces.com/problemset/problem/546/D[Task 546D, window="_blank"]
 
 [source,java]
 .Solution
