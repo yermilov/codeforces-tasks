@@ -2,12 +2,18 @@ package com.codeforces.yermilov.task_543a;
 
 import com.codeforces.yermilov.util.FastScanner;
 // tag::imports[]
-import java.io.*;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
-import static java.util.Arrays.copyOf;
+import static java.lang.Math.min;
+import static java.util.Collections.reverseOrder;
+import static java.util.Comparator.comparing;
+import static java.util.Comparator.comparingInt;
+import static java.util.function.IntUnaryOperator.identity;
+import static java.util.stream.Collectors.toList;
 // end::imports[]
 // tag::submit[]
 
@@ -19,15 +25,23 @@ public class Main {
 
     class TaskSolver {
 
-        final Map<TaskRequest, Integer> cache;
+        final int[][][] cache;
 
         final int mod;
         final int[] a;
 
+        final int[] minas;
+
         public TaskSolver(int mod, int[] a) {
             this.mod = mod;
-            this.a = copyOf(a, a.length);
-            this.cache = new HashMap<>();
+            this.a = Arrays.stream(a).map(x -> -x).sorted().map(x -> -x).toArray();
+            this.cache = new int [501][501][501];
+
+            minas = new int[a.length];
+            minas[0] = this.a[0];
+            for (int i = 1; i < a.length; i++) {
+                minas[i] = min(minas[i-1], this.a[i]);
+            }
         }
 
         int solve(int n, int m, int b) {
@@ -36,59 +50,31 @@ public class Main {
             }
 
             if (m == 0) {
-                if (b >= 0) {
-                    return 1;
-                } else {
-                    return 0;
-                }
+                return 1;
             }
 
             if (n == 0) {
                 return 0;
             }
 
-            TaskRequest taskRequest = new TaskRequest(n, m, b);
-
-            if (!cache.containsKey(taskRequest)) {
-                int result = solve(n - 1, m, b);
-                for (int i = 1; i <= m; i++) {
-                    result = (result + solve(n - 1, m - i, b - i * a[n-1])) % mod;
-                }
-                cache.put(taskRequest, result);
+            if (minas[n-1] * m > b) {
+                return 0;
             }
 
-            return cache.get(taskRequest);
-        }
+            if (n == 1) {
+                return 1;
+            }
 
-    }
+            if (cache[n][m][b] == 0) {
+                int result = 0;
+                for (int i = 0; i <= m; i++) {
+                    result = (result + solve(n - 1, m - i, b - i * a[n-1])) % mod;
+                }
 
-    class TaskRequest {
-        int n, m, b;
+                cache[n][m][b] = result;
+            }
 
-        TaskRequest(int n, int m, int b) {
-            this.n = n;
-            this.m = m;
-            this.b = b;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            TaskRequest that = (TaskRequest) o;
-
-            if (n != that.n) return false;
-            if (m != that.m) return false;
-            return b == that.b;
-        }
-
-        @Override
-        public int hashCode() {
-            int result = n;
-            result = 31 * result + m;
-            result = 31 * result + b;
-            return result;
+            return cache[n][m][b];
         }
     }
 }
