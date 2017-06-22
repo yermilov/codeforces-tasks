@@ -2,83 +2,60 @@ package com.codeforces.yermilov.task_543a;
 
 import com.codeforces.yermilov.util.FastScanner;
 // tag::imports[]
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Stream;
-
-import static java.lang.Math.min;
-import static java.util.Collections.reverseOrder;
-import static java.util.Comparator.comparing;
-import static java.util.Comparator.comparingInt;
-import static java.util.function.IntUnaryOperator.identity;
-import static java.util.stream.Collectors.toList;
+import java.io.BufferedOutputStream;
+import java.io.PrintWriter;
 // end::imports[]
 // tag::submit[]
 
 public class Main {
 
-    int solve(int n, int m, int b, int mod, int[] a) {
-        return new TaskSolver(mod, a).solve(n, m, b);
+    public static void main(String[] args) {
+        Main main = new Main();
+
+        FastScanner fastScanner = new FastScanner();
+        PrintWriter output = new PrintWriter(new BufferedOutputStream(System.out));
+
+        int n = fastScanner.nextInt();
+        int m = fastScanner.nextInt();
+        int b = fastScanner.nextInt();
+        int mod = fastScanner.nextInt();
+
+        int[] a = new int[n];
+
+        for (int index = 0; index < n; index++) {
+            a[index] = fastScanner.nextInt();
+        }
+
+        long result = main.solve(n, m, b, mod, a);
+
+        output.println(result);
+
+        output.close();
     }
 
-    class TaskSolver {
-
-        final int[][][] cache;
-        final boolean[][][] calcualted;
-
-        final int mod;
-        final int[] a;
-
-        final int[] minas;
-
-        public TaskSolver(int mod, int[] a) {
-            this.mod = mod;
-            this.a = Arrays.stream(a).map(x -> -x).sorted().map(x -> -x).toArray();
-            this.cache = new int [501][501][501];
-            this.calcualted = new boolean[501][501][501];
-
-            minas = new int[a.length];
-            minas[0] = this.a[0];
-            for (int i = 1; i < a.length; i++) {
-                minas[i] = min(minas[i-1], this.a[i]);
-            }
-        }
-
-        int solve(int n, int m, int b) {
-            if (b < 0) {
-                return 0;
-            }
-
-            if (m == 0) {
-                return 1;
-            }
-
-            if (n == 0) {
-                return 0;
-            }
-
-            if (minas[n-1] * m > b) {
-                return 0;
-            }
-
-            if (n == 1) {
-                return 1;
-            }
-
-            if (!calcualted[n][m][b]) {
-                int result = 0;
-                for (int i = 0; i <= m; i++) {
-                    result = (result + solve(n - 1, m - i, b - i * a[n-1])) % mod;
+    int solve(int N, int M, int B, int mod, int[] a) {
+        int[][][] dn = new int [501][501][501];
+        for (int n = 0; n <= N; n++) {
+            for (int m = 0; m <= M; m++) {
+                for (int b = 0; b <= B; b++) {
+                    if (m == 0) {
+                        dn[n][m][b] = 1;
+                    } else {
+                        if (n == 0) {
+                            dn[n][m][b] = 0;
+                        } else {
+                            if (a[n-1] <= b) {
+                                dn[n][m][b] = (dn[n - 1][m][b] + dn[n][m - 1][b - a[n-1]]) % mod;
+                            } else {
+                                dn[n][m][b] = dn[n - 1][m][b];
+                            }
+                        }
+                    }
                 }
-
-                cache[n][m][b] = result;
-                calcualted[n][m][b] = true;
             }
-
-            return cache[n][m][b];
         }
+
+        return dn[N][M][B] % mod;
     }
 }
 // end::submit[]

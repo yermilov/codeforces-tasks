@@ -18,7 +18,6 @@ class Test extends Specification {
 
         where:
         n   | m   | b   | mod        | a                                                    || expected
-        500 | 500 | 500 | 1000000007 | (1..500).collect { new Random().nextInt(10) } || -1
         3   | 3   | 3   | 100        | [ 1, 1, 1 ]                                          || 10
         3   | 6   | 5   | 1000000007 | [ 1, 2, 3 ]                                          || 0
         3   | 5   | 6   | 11         | [ 1, 2, 1 ]                                          || 0
