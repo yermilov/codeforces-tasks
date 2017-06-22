@@ -34,7 +34,7 @@ public class Main {
     }
 
     int solve(int N, int M, int B, int mod, int[] a) {
-        int[][][] dn = new int [501][501][501];
+        int[][][] dn = new int [N+1][M+1][B+1];
         for (int n = 0; n <= N; n++) {
             for (int m = 0; m <= M; m++) {
                 for (int b = 0; b <= B; b++) {
